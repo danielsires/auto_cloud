@@ -9,8 +9,8 @@ const {
 } = require('graphql')
 
 // Mongoose Models
-const Driver = require('./models/Driver')
-const Vehicle = require('./models/Vehicle')
+const Driver = require('../models/Driver')
+const Vehicle = require('../models/Vehicle')
 
 // GraphQL Types
 
@@ -50,7 +50,15 @@ const VehicleType = new GraphQLObjectType({
             type: GraphQLString,
         },
         condition: {
-            type: VehicleConditionType,
+            type: new GraphQLEnumType({
+                name: 'Condition',
+                values: {
+                    New: { value: 'New' },
+                    Used: { value: 'Used' },
+
+                }
+            }),
+
         },
         driver: {
             type: DriverType,
@@ -141,7 +149,15 @@ const Mutation = new GraphQLObjectType({
                     type: new GraphQLNonNull(GraphQLString),
                 },
                 condition: {
-                    type: new GraphQLNonNull(VehicleConditionType),
+                    type: new GraphQLEnumType({
+                        name: 'VehicleCondition',
+                        values: {
+                            New: { value: 'New' },
+                            Used: { value: 'Used' },
+                        }
+                    }),
+
+
                 },
                 driverId: {
                     type: new GraphQLNonNull(GraphQLID),
@@ -200,7 +216,14 @@ const Mutation = new GraphQLObjectType({
                     type: GraphQLString,
                 },
                 condition: {
-                    type: VehicleConditionType,
+                    type: new GraphQLEnumType({
+                        name: 'UpdateVehicleCondition',
+                        values: {
+                            New: { value: 'New' },
+                            Used: { value: 'Used' },
+                        }
+                    }),
+
                 },
                 driverId: {
                     type: GraphQLID,
