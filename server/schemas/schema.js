@@ -110,7 +110,7 @@ const RootQuery = new GraphQLObjectType({
     }
 })
 
-// Create Update Delete
+// Create - Update - Delete
 const Mutation = new GraphQLObjectType({
     name: 'Mutation',
     fields: {
